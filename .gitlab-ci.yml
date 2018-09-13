@@ -5,6 +5,7 @@ stages:
   - rewiew
   - stage
   - production
+
 variables:
   DATABASE_URL: 'mongodb://mongo/user_posts'
 before_script:
@@ -49,7 +50,7 @@ branch_review:
   only:
     - branches
   except:
-   - master
+    - master
 
 staging:
   stage: stage
