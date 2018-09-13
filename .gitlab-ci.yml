@@ -34,7 +34,7 @@ test_unit_job:
    - ruby simpletest.rb 
 
 deploy_dev_job:
-  stage: rewiew
+  stage: review
   script:
     - echo 'Deploy'
   environment:
