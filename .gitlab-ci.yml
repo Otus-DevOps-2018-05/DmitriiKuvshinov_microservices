@@ -34,6 +34,6 @@ deploy_dev_job:
   stage: rewiew
   script:
     - echo 'Deploy'
-  enviroment:
+  environment:
     name: dev
     url: http://dev.example.com
