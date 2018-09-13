@@ -30,7 +30,10 @@ test_unit_job:
   script:
    - ruby simpletest.rb 
 
-deploy_job:
-  stage: deploy
+deploy_dev_job:
+  stage: rewiew
   script:
     - echo 'Deploy'
+  enviroment:
+    name: dev
+    url: http://dev.example.com
