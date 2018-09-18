@@ -4,16 +4,6 @@ services:
     image: mongo:3.2
     volumes:
       - post_db:/data/db
-  ui:
-    image: ${USER_NAME}/ui:1.0
-    ports:
-      - ${PORTUI}:${PORTUI}/tcp
-
-  post:
-    image: ${USER_NAME}/post:1.0
-  comment:
-    image: ${USER_NAME}/comment:1.0
-
   prometheus:
     image: ${USER_NAME}/prometheus
     ports:
@@ -37,7 +27,16 @@ services:
       - '--path.sysfs=/host/sys'
       - '--collector.filesystem.ignored-mount-points="^/(sys|proc|dev|host|etc)($$|/)"'
 
+  ui:
+    image: ${USER_NAME}/ui:1.0
+    ports:
+      - ${PORTUI}:${PORTUI}/tcp
+
+  post:
+    image: ${USER_NAME}/post:1.0
+  comment:
+    image: ${USER_NAME}/comment:1.0
+
 volumes:
   post_db:
   prometheus_data:
-  

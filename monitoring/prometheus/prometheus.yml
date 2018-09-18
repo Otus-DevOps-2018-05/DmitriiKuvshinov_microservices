@@ -6,18 +6,18 @@ scrape_configs:
   - job_name: 'prometheus'
     static_configs:
       - targets:
-        - '35.195.183.189:9090'
+        - 'localhost:9090'
 
   - job_name: 'ui'
     static_configs:
       - targets:
-        - '35.195.183.189:9292'
+        - 'ui:9292'
 
   - job_name: 'comment'
     static_configs:
       - targets:
-        - '35.195.183.189:9292'
+        - 'comment:9292'
   - job_name: 'node'
     static_configs:
       - targets:
-        - '35.195.183.189:9100'
+        - 'node:9100'
