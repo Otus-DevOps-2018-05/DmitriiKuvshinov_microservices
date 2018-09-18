@@ -1,15 +1,13 @@
 version: '3.3'
 services:
-  post_db:
-    image: mongo:3.2
-    volumes:
-      - post_db:/data/db
   prometheus:
     image: ${USER_NAME}/prometheus
     ports:
       - '9090:9090'
     volumes:
       - prometheus_data:/prometheus
+    networks:
+      front_net:
     command:
       - '--config.file=/etc/prometheus/prometheus.yml'
       - '--storage.tsdb.path=/prometheus'
@@ -21,22 +19,45 @@ services:
     volumes:
       - /proc:/host/proc:ro
       - /sys:/host/sys:ro
-      - /:/rootfs:ro
+    networks:
+      back_net:
+      front_net:
     command:
       - '--path.procfs=/host/proc'
       - '--path.sysfs=/host/sys'
       - '--collector.filesystem.ignored-mount-points="^/(sys|proc|dev|host|etc)($$|/)"'
 
+  post_db:
+    image: mongo:3.2
+    volumes:
+      - post_db:/data/db
+    networks:
+      back_net:
+        aliases:
+          - post_db
+          - comment_db
+
   ui:
     image: ${USER_NAME}/ui:1.0
     ports:
       - ${PORTUI}:${PORTUI}/tcp
-
+    networks:
+      front_net:
   post:
     image: ${USER_NAME}/post:1.0
+    networks:
+      back_net:
+      front_net:
   comment:
     image: ${USER_NAME}/comment:1.0
+    networks:
+      back_net:
+      front_net:
 
 volumes:
   post_db:
   prometheus_data:
+
+networks:
+  back_net:
+  front_net:
