@@ -68,6 +68,8 @@ services:
 volumes:
   grafana_data:
   prometheus_data:
+
 networks:
   back_net:
   front_net:
+
