@@ -4,7 +4,6 @@ DmitriiKuvshinov microservices repository
 <b>Введение в Docker</b>
 Знакомство и введение в технологию контейнеризации
 
-
 ## ДЗ 13
 <b>Docker-образа. Микросервисы.</b>
 
