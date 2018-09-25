@@ -3,17 +3,17 @@ docker-machine create --driver google \
  --google-machine-image https://www.googleapis.com/compute/v1/projects/ubuntu-os-cloud/global/images/family/ubuntu-1604-lts \
  --google-machine-type n1-standard-1 \
  --google-zone europe-west1-b \
- docker-host
-eval $(docker-machine env docker-host)
-cd ../monitoring/alertmanager/
-export USER_NAME=kuvshinov
-docker build -t $USER_NAME/alertmanager .
-cd ../prometheus/
-export USER_NAME=kuvshinov
-docker build -t $USER_NAME/prometheus .
-cd ../../docker/
-docker-compose -f docker-compose-monitoring.yml up -d
-docker-compose docker-compose.yml up -d
-docker-compose -f docker-compose-monitoring.yml ps
-docker-compose ps
-docker-machine ip docker-host
+ ${1}
+eval $(docker-machine env ${1})
+#cd ../monitoring/alertmanager/
+#export USER_NAME=kuvshinov
+#docker build -t $USER_NAME/alertmanager .
+#cd ../prometheus/
+#export USER_NAME=kuvshinov
+#docker build -t $USER_NAME/prometheus .
+#cd ../../docker/
+#docker-compose -f docker-compose-monitoring.yml up -d
+#docker-compose docker-compose.yml up -d
+#docker-compose -f docker-compose-monitoring.yml ps
+#docker-compose ps
+docker-machine ip ${1}
