@@ -20,7 +20,7 @@ spec:
      component: ui
    spec:
     containers:
-     - image: kuvshinov/ui:1.0
+     - image: loktionovam/ui
        name: ui
        env:
        - name: ENV
