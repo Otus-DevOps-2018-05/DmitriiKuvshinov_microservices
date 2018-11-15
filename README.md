@@ -8,6 +8,10 @@ DmitriiKuvshinov microservices repository
 ## ДЗ 13
 <b>Docker-образа. Микросервисы.</b>
 
+• Создание docker host
+• Создание своего образа
+• Работа с Docker Hub
+
 ```
 Обратите внимание! Сборка ui началась не с первого шага. Подумайте - почему?
 ```
