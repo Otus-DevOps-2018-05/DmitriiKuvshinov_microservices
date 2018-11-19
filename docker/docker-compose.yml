@@ -3,13 +3,32 @@ services:
   post_db:
     image: mongo:3.2
     container_name: post_db
+  prometheus:
+    image: ${USER_NAME}/prometheus
+    ports:
+      - '9090:9090'
     volumes:
-      - post_db:/data/db
+      - prometheus_data:/prometheus
+    networks:
+      front_net:
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--storage.tsdb.retention=1d'
+
+  node-exporter:
+    image: prom/node-exporter:v0.15.2
+    user: root
+    volumes:
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
     networks:
       back_net:
-        aliases:
-          - post_db
-          - comment_db
+      front_net:
+    command:
+      - '--path.procfs=/host/proc'
+      - '--path.sysfs=/host/sys'
+      - '--collector.filesystem.ignored-mount-points="^/(sys|proc|dev|host|etc)($$|/)"'
   post:
     image: ${USER_NAME}/post
     container_name: post
@@ -37,6 +56,11 @@ services:
       options:
         fluentd-address: localhost:24224
         tag: service.ui
+  post:
+    image: ${USER_NAME}/post:1.0
+    networks:
+      back_net:
+      front_net:
   comment:
     image: ${USER_NAME}/comment:1.0
     networks:
@@ -44,6 +68,7 @@ services:
       front_net:
 volumes:
   post_db:
+  prometheus_data:
 networks:
   back_net:
   front_net:
