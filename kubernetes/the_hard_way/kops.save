@@ -1,5 +1,0 @@
-kops create cluster otus-test-clustr \
- --zones europe-west1-b \
- --networking weave \
- --stage gs://otus-k8s-cluster/ \
- --project=
