@@ -8,6 +8,7 @@ metadata:
     component: mongo
     post-db: "true"
     comment-db: "true"
+  name: post-deployment
 spec:
   replicas: 1
   selector:
@@ -33,3 +34,14 @@ spec:
       - name: mongo-persistent-storage
         persistentVolumeClaim:
          claimName: mongo-pvc-dynamic
+        emptyDir: {}
+      app: post
+  template:
+    metadata:
+      name: post
+      labels:
+        app: post
+    spec:
+      containers:
+      - image: ${USER_NAME}/post
+        name: post
