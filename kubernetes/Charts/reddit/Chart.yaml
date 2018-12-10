@@ -5,3 +5,4 @@ description: OTUS sample reddit application
 maintainers:
  - name: kuvshinov
    email: my@gmail.com
+appVersion: 1.0
